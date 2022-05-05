@@ -1,0 +1,25 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "Terminal application to generate a readme.md file from user input",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daman29/README-Generator.git"
+  },
+  "keywords": [
+    "readme"
+  ],
+  "author": "daman29",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daman29/README-Generator/issues"
+  },
+  "homepage": "https://github.com/daman29/README-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
