@@ -4,40 +4,39 @@ const inquirer = require("inquirer");
 const readmeWriter = (data, badge) => {
   var markdownContent;
   if (data.screenshot === "yes") {
-    markdownContent = 
-    `# ${data.title}
+    markdownContent = `# ${data.title}
 
-    ![badge for ${data.license}](https://img.shields.io/badge/license-${badge}-brightgreen)
+![badge for ${data.license}](https://img.shields.io/badge/license-${badge}-brightgreen)
 
-    ## Description
-    ${data.description}
+## Description
+- ${data.description}
 
-    ## Table of Contents
-    1. [Installation](#installation)
-    2. [Usage](#usage)
-    3. [License](#license)
-    4. [Contributing](#contributing)
-    5. [Tests](#tests)
-    6. [Questions](#questions)
+## Table of Contents
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [License](#license)
+4. [Contributing](#contributing)
+5. [Tests](#tests)
+6. [Questions](#questions)
 
-    ## Installation
-    ${data.installation}. Dependencies - ${data.dependencies}
+## Installation
+- ${data.installation}. Dependencies - ${data.dependencies}
 
-    ## Usage
-    ${data.usage}\n
-    ![alt text](assets/images/screenshot.png)
+## Usage
+- ${data.usage}\n
+![alt text](assets/images/screenshot.png)
 
-    ## License
-    - This application is licensed under the ${data.license} License
+## License
+- This application is licensed under the ${data.license} License
 
-    ## Contributing
-    ${data.contributing}
+## Contributing
+- ${data.contributing}
 
-    ## Tests
-    ${data.tests}
+## Tests
+- ${data.tests}
 
-    ## Questions
-    - Reach me via email at ${data.email} or issues on [github](https://github.com/${data.githubUser})`;
+## Questions
+- Reach me via email at ${data.email} or issues on [github](https://github.com/${data.githubUser})`;
   } else {
     markdownContent = `# ${data.title}
 
@@ -55,24 +54,25 @@ ${data.description}
 6. [Questions](#questions)
 
 ## Installation
-${data.installation}. Dependencies - ${data.dependencies}
+- ${data.installation}. 
+- Dependencies: ${data.dependencies}
 
 ## Usage
-${data.usage}
+- ${data.usage}
 
 ## License
 - This application is licensed under the ${data.license} License
 
 ## Contributing
-${data.contributing}
+- ${data.contributing}
 
 ## Tests
-${data.tests}
+- ${data.tests}
 
 ## Questions
 - Reach me via email at ${data.email} or issues on [github](https://github.com/${data.githubUser})`;
   }
-  fs.writeFile("README.md", markdownContent, (err) => {
+  fs.writeFile("output/README.md", markdownContent, (err) => {
     err ? console.log(err) : console.log("README.md generated");
   });
 };
@@ -148,6 +148,13 @@ inquirer
     },
   ])
   .then((response) => {
-    let badge = response.license.split(' ')
+    var badge
+    if(response.license === 'BSD 3-clause'){
+      badge = 'BSD%203--clause'
+    }else if(response.license === 'BSD 2-clause'){
+      badge = 'BSD%202--clause'
+    }else{
+      badge = response.license
+    }
     readmeWriter(response, badge);
   });
