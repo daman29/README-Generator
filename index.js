@@ -8,6 +8,7 @@ const readmeWriter = (data, badge) => {
   var markdownContent;
   //if user selects to include screenshots or images to the readme it adds a blank image line for ease of use
   if (data.screenshot === "yes") {
+    // writes readme file content to the variable
     markdownContent = `# ${data.title}
 
 ![badge for ${data.license}](https://img.shields.io/badge/license-${badge}-brightgreen)
@@ -41,7 +42,9 @@ const readmeWriter = (data, badge) => {
 
 ## Questions
 - Reach me via email at ${data.email} or issues on [github](https://github.com/${data.githubUser})`;
+// else if the user selected no for the screenshot then dont add image line
   } else {
+    // writes readme file content to the variable
     markdownContent = `# ${data.title}
 
 ![badge for ${data.license}](https://img.shields.io/badge/license-${badge}-brightgreen)
@@ -76,11 +79,15 @@ ${data.description}
 ## Questions
 - Reach me via email at ${data.email} or issues on [github](https://github.com/${data.githubUser})`;
   }
+  // fs write file function to output the file to the output folder.
+  // content is the markdownContent variable
+  // ternary statement to check if there is an error if yes then print error else write success message
   fs.writeFile("output/README.md", markdownContent, (err) => {
     err ? console.log(err) : console.log("README.md generated");
   });
 };
 
+// inquirer prompt to ask user for input
 inquirer
   .prompt([
     {
@@ -151,14 +158,17 @@ inquirer
       message: "What is your email address?",
     },
   ])
+  // once the prompts are completed then run below function
   .then((response) => {
+    // declare empty badge variable
     var badge
-    if(response.license === 'BSD 3-clause'){
+    if(response.license === 'BSD 3-clause'){ // if license is 'BSD 3-clause' then let badge = the correct URL format for the badge
       badge = 'BSD%203--clause'
-    }else if(response.license === 'BSD 2-clause'){
+    }else if(response.license === 'BSD 2-clause'){ // else if license is 'BSD 2-clause' then let badge = the correct URL format for the badge
       badge = 'BSD%202--clause'
-    }else{
+    }else{ // else let it be response.license
       badge = response.license
     }
+    // call the writer function with the response object and badge value
     readmeWriter(response, badge);
   });
