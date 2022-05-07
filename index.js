@@ -83,7 +83,7 @@ ${data.description}
   // content is the markdownContent variable
   // ternary statement to check if there is an error if yes then print error else write success message
   fs.writeFile("output/README.md", markdownContent, (err) => {
-    err ? console.log(err) : console.log("README.md generated");
+    err ? console.log(err) : console.log("README.md generated in output folder");
   });
 };
 
