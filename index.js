@@ -1,8 +1,12 @@
+// constants declarations of required libraries fs and inquirer
 const fs = require("fs");
 const inquirer = require("inquirer");
 
+// function declaration to write readme files inputs are the data object and badge name
 const readmeWriter = (data, badge) => {
+  // declare empty markdownContent variable
   var markdownContent;
+  //if user selects to include screenshots or images to the readme it adds a blank image line for ease of use
   if (data.screenshot === "yes") {
     markdownContent = `# ${data.title}
 
